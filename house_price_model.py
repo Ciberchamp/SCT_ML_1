@@ -17,9 +17,9 @@ print("--- Starting House Price Prediction Model ---")
 
 try:
     df = pd.read_csv(data_path)
-    print(f"✅ Dataset loaded successfully.")
+    print(f" Dataset loaded successfully.")
 except FileNotFoundError:
-    print(f"❌ Error: Could not find 'train.csv' at the expected path: {data_path}")
+    print(f" Error: Could not find 'train.csv' at the expected path: {data_path}")
     exit()
 
 df['TotalBath'] = df['FullBath'] + (0.5 * df['HalfBath'])
@@ -31,16 +31,16 @@ X = df_model[features]
 y = df_model[target]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-print("✅ Data split for training and testing.")
+print(" Data split for training and testing.")
 
 model = LinearRegression()
 model.fit(X_train, y_train)
-print("✅ Linear Regression model trained.")
+print(" Linear Regression model trained.")
 
 print("\n--- Evaluating Model Performance ---")
 y_pred_test = model.predict(X_test)
 r2 = r2_score(y_test, y_pred_test)
-print(f"✅ R-squared Score: {r2:.2f}")
+print(f" R-squared Score: {r2:.2f}")
 print(f"(This means our model explains roughly {r2:.0%} of the variance in house prices)")
 
 print("\n--- Creating Visualizations ---")
@@ -52,7 +52,7 @@ plt.xlabel('Square Feet', fontsize=12)
 plt.ylabel('Number of Houses', fontsize=12)
 plt.grid(True)
 plt.savefig(os.path.join(script_dir, 'living_area_distribution.png'))
-print(f"✅ Plot 2 saved as 'living_area_distribution.png'")
+print(f" Plot 2 saved as 'living_area_distribution.png'")
 
 residuals = y_test - y_pred_test
 plt.figure(figsize=(10, 6))
@@ -63,6 +63,6 @@ plt.xlabel('Predicted Prices ($)', fontsize=12)
 plt.ylabel('Residuals (Actual - Predicted)', fontsize=12)
 plt.grid(True)
 plt.savefig(os.path.join(script_dir, 'residual_plot.png'))
-print(f"✅ Plot 3 saved as 'residual_plot.png'")
+print(f" Plot 3 saved as 'residual_plot.png'")
 
 print("\n--- All tasks complete. ---") 
